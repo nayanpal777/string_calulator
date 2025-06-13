@@ -35,5 +35,19 @@ RSpec.describe StringCalculator, type: :model do
         expect(StringCalculator.add("4\n5\n6")).to eq(15)
       end
     end
+
+    context 'when using custom delimiters' do
+      it 'handles semicolon (;) as a delimiter' do
+        expect(StringCalculator.add("//;\n2;3")).to eq(5)
+      end
+
+      it 'handles custom delimiter mixed with spaces' do
+        expect(StringCalculator.add("//:\n1:2")).to eq(3)
+      end
+
+      it 'handles pipe (|) as a delimiter' do
+        expect(StringCalculator.add("//|\n1|2|3")).to eq(6)
+      end
+    end
   end
 end
