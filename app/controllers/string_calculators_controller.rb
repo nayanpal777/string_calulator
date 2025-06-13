@@ -1,5 +1,6 @@
 class StringCalculatorsController < ApplicationController
   def index
+    @string_calculators = StringCalculator.order(created_at: :desc)
   end
 
   def new

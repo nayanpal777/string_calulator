@@ -1,2 +1,23 @@
-<h1>StringCalculators#new</h1>
-<p>Find me in app/views/string_calculators/new.html.erb</p>
+<h1>New String Calculator</h1>
+
+<%= form_with model: @string_calculator, local: true do |form| %>
+  <% if @string_calculator.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@string_calculator.errors.count, "error") %> prohibited this calculator from being saved:</h2>
+      <ul>
+        <% @string_calculator.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :input_string %><br>
+    <%= form.text_field :input_string %>
+  </div>
+
+  <div>
+    <%= form.submit "Calculate" %>
+  </div>
+<% end %>
