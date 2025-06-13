@@ -1,5 +1,9 @@
 class StringCalculator < ApplicationRecord
 
+  validates :input_string, presence: true
+
+  before_save :compute_result
+
   def self.add(input)
     return 0 if input.nil? || input&.strip&.empty?
 
@@ -21,5 +25,11 @@ class StringCalculator < ApplicationRecord
     end
 
     int_numbers.map(&:to_i).sum
+  end
+
+  private
+
+  def compute_result
+    self.result = StringCalculator.add(input_string)
   end
 end
