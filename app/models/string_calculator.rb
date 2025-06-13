@@ -13,6 +13,13 @@ class StringCalculator < ApplicationRecord
     end
     numbers = input.split(delimiter).map(&:strip)
 
-    numbers.map(&:to_i).sum
+    int_numbers = numbers.map(&:to_i)
+    negatives = int_numbers.select { |n| n < 0 }
+
+    if negatives.any?
+      raise ArgumentError, "negative numbers not allowed: #{negatives.join(', ')}"
+    end
+
+    int_numbers.map(&:to_i).sum
   end
 end
